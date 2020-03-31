@@ -1,0 +1,10 @@
+---
+- name: creating a user
+  hosts: sync
+  become: yes 
+
+  tasks:
+    - name: creating user
+      user:
+        name: thinknyx
+        state: present 

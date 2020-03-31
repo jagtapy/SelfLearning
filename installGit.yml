@@ -1,0 +1,13 @@
+---
+- name: installing git
+  hosts: sync
+  become: yes
+
+  tasks:
+    - name: GIT installation
+      yum:
+        name: git
+        state: present
+
+#    - name: GIT
+ #     service: name=git state=started enabled=yes

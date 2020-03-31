@@ -1,0 +1,52 @@
+---
+
+- name: Install docker
+  hosts: "{{ group }}"
+  become: yes
+
+  tasks:
+
+  - name: installing docker prerequisite packages
+    yum:
+      name: 
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+      state: latest
+
+  - name: Config Docker Repo
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docker-ce.repo
+      
+  - name: installing docker
+    yum:
+      name: docker
+      state: present
+
+  - name: starting service
+    service: name=docker state=started enabled=yes
+
+  - name: chowni
+    file:
+      path: /var/run/docker.sock
+      owner: centos
+      group: users
+  - name: checking docker version
+    command: docker --version
+    register: out
+   
+  - name: Printing
+    debug: var=out.stdout_lines
+
+      
+ # - name: "Config Docker Repo"
+  #  get-url:
+   #   url: https://download.docker.com/linux/centos/docker-ce.repo
+    #  dest: /etc/yum.repos.d
+  
+
+
+
+
+
