@@ -44,7 +44,7 @@
   #  get-url:
    #   url: https://download.docker.com/linux/centos/docker-ce.repo
     #  dest: /etc/yum.repos.d
-  
+    # this line also can be deleted  
 
 
 
